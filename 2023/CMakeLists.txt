@@ -11,3 +11,9 @@ set_source_files_properties(${SRC_FILES} PROPERTIES LANGUAGE CXX)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+file(GLOB_RECURSE INPUT_FILE "./input/*")
+foreach(FILE ${INPUT_FILE})
+    get_filename_component(BARENAME ${FILE} NAME)
+    configure_file(${FILE} ${CMAKE_CURRENT_BINARY_DIR}/input/${BARENAME} COPYONLY)
+endforeach()

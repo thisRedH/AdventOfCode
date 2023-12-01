@@ -3,7 +3,7 @@
 
 uint32_t solve1a() {
     std::vector<int> calibrationValues;
-    std::ifstream inputFile("F:\\dev\\projects\\adventofcode\\2023\\input\\day1.txt");
+    std::ifstream inputFile("./input/day1.txt");
 
     for (std::string line; getline(inputFile, line);) {
         uint8_t first = 0;
