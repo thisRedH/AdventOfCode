@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <vector>
 #include <string>
+#include <sstream>
 #include <cstring>
 #include <iostream>
 #include <fstream>
