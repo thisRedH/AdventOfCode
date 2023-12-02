@@ -2,11 +2,13 @@
 #include <stdint.h>
 #include <vector>
 #include <string>
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <iterator>
 #include <algorithm>
 #include <numeric>
+#include <array>
 
 const uint16_t kCURRENT_DAY = 1;
 
