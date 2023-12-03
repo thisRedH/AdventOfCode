@@ -11,7 +11,7 @@
 #include <numeric>
 #include <array>
 
-const uint16_t kCURRENT_DAY = 2;
+const uint16_t kCURRENT_DAY = 3;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -20,6 +20,7 @@ const uint16_t kCURRENT_DAY = 2;
 void solve(uint16_t day);
 uint32_t solve1a();             uint32_t solve1b();
 uint32_t solve2a();             uint32_t solve2b();
+uint32_t solve3a();             uint32_t solve3b();
 
 #ifdef IMPL_DAYS
 
@@ -30,6 +31,9 @@ void solve(uint16_t day) {
         break;
     case 2:
         SHOW_AB(day, solve2a(), solve2b());
+        break;
+    case 3:
+        SHOW_AB(day, solve3a(), solve3b());
         break;
     default:
         break;
