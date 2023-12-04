@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <numeric>
 #include <array>
+#include <unordered_map>
 
 const uint16_t kCURRENT_DAY = 3;
 
