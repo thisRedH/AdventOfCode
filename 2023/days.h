@@ -43,4 +43,10 @@ void solve(uint16_t day) {
     std::cout << std::endl;
 }
 
+inline void solveAll() {
+    for (size_t i = 1; i <= kCURRENT_DAY; i++) {
+        solve(i);
+    }
+}
+
 #endif // IMPL_DAYS
