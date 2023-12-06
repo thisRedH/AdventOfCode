@@ -12,7 +12,7 @@
 #include <array>
 #include <unordered_map>
 
-const uint16_t kCURRENT_DAY = 4;
+const uint16_t kCURRENT_DAY = 5;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -23,6 +23,7 @@ uint32_t solve1a();             uint32_t solve1b();
 uint32_t solve2a();             uint32_t solve2b();
 uint32_t solve3a();             uint32_t solve3b();
 uint32_t solve4a();             uint32_t solve4b();
+uint32_t solve5a();             uint32_t solve5b();
 
 #ifdef IMPL_DAYS
 
@@ -39,6 +40,9 @@ void solve(uint16_t day) {
         break;
     case 4:
         SHOW_AB(day, solve4a(), solve4b());
+        break;
+    case 5:
+        SHOW_AB(day, solve5a(), solve5b());
         break;
     default:
         break;
