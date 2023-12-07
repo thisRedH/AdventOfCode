@@ -43,10 +43,28 @@ uint32_t solve6a() {
 
 uint32_t solve6b() {
     std::ifstream input("./input/day6.txt");
+    std::vector<std::string> lines;
 
     for (std::string line; getline(input, line);) {
-
+        if (line.length() < 1) continue;
+        line.erase(0, line.find_first_of(' '));
+        line.erase(
+            std::remove_if(line.begin(), line.end(), isspace),
+            line.end()
+        );
+        lines.push_back(line);
     }
 
-    return 0;
+    uint32_t time = std::stoi(lines[0]);
+    uint64_t dist = std::stoll(lines[1]);
+
+    uint32_t win = 0;
+
+    for (uint64_t held_ms = 1; held_ms <= time; held_ms++) {
+        uint64_t current_dist = held_ms * (time - held_ms);
+        if (current_dist > dist)
+            win++;
+    }
+
+    return win;
 }
