@@ -25,8 +25,7 @@ std::vector<std::string> extract_words(const std::string& input) {
 uint32_t solve8a() {
     std::ifstream input("./input/day8.txt");
 
-//    std::map<size_t, std::pair<size_t, size_t>> map;
-    std::map<std::string, std::pair<std::string, std::string>> map;
+    std::map<size_t, std::pair<size_t, size_t>> map;
     std::string route;
 
     getline(input, route);
@@ -35,18 +34,15 @@ uint32_t solve8a() {
         if (!std::isalpha(line[0])) continue;
         std::vector<std::string> words = std::move(extract_words(line));
 
-/*         map[std::hash<std::string>{}(words[0])] = std::make_pair(
+        map[std::hash<std::string>{}(words[0])] = std::make_pair(
             std::hash<std::string>{}(words[1]),
             std::hash<std::string>{}(words[2])
-        ); */
-        map[words[0]] = std::make_pair(words[1], words[2]);
+        );
     }
 
     uint32_t total_steps = 0;
-    //size_t current = std::hash<std::string>{}("AAA");
-    //const size_t goal = std::hash<std::string>{}("ZZZ");
-    std::string current = "AAA";
-    const char* goal = "ZZZ";
+    size_t current = std::hash<std::string>{}("AAA");
+    const size_t goal = std::hash<std::string>{}("ZZZ");
     for (uint32_t i;; i++) {
         const char c = route[i % route.length()];
         switch (c){
