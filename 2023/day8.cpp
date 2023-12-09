@@ -45,7 +45,7 @@ uint32_t solve8a() {
     const size_t goal = std::hash<std::string>{}("ZZZ");
     for (uint32_t i;; i++) {
         const char c = route[i % route.length()];
-        switch (c){
+        switch (c) {
         case 'L':
             current = map.at(current).first;
             break;
@@ -68,13 +68,66 @@ uint32_t solve8a() {
 }
 
 
-uint32_t solve8b() {
-    std::ifstream input("./input/day8.txt");
+uint32_t get_steps(size_t start, const std::vector<size_t>& goal,
+    const std::string& route,
+    const std::map<size_t, std::pair<size_t, size_t>>& map
+) {
+    uint32_t total_steps = 0;
+    for (;; total_steps++) {
+        const char c = route[total_steps % route.length()];
+        switch (c) {
+        case 'L':
+            start = map.at(start).first;
+            break;
+        case 'R':
+            start = map.at(start).second;
+            break;
+        default:
+            break;
+        }
 
-    for (std::string line; getline(input, line);) {
+        if (std::find(goal.begin(), goal.end(), start) != goal.end())
+            break;
 
     }
 
+    return total_steps +1;
+}
+
+uint64_t solve8b() {
+    std::ifstream input("./input/day8.txt");
+
+    std::map<size_t, std::pair<size_t, size_t>> map;
+    std::vector<size_t> current;
+    std::vector<size_t> goal;
+    std::string route;
+
+    getline(input, route);
+
+    for (std::string line; getline(input, line);) {
+        if (!std::isalpha(line[0])) continue;
+        std::vector<std::string> words = std::move(extract_words(line));
+
+        if (words[0].back() == 'A')
+            current.push_back(std::hash<std::string>{}(words[0]));
+        if (words[0].back() == 'Z')
+            goal.push_back(std::hash<std::string>{}(words[0]));
+
+        map[std::hash<std::string>{}(words[0])] = std::make_pair(
+            std::hash<std::string>{}(words[1]),
+            std::hash<std::string>{}(words[2])
+        );
+    }
+
+    std::vector<size_t> each_steps;
+    for (const size_t& n : current)
+        each_steps.push_back(get_steps(n, goal, route, map));
+    
+    uint64_t total_steps = each_steps[0];
+    for (size_t i = 1; i < each_steps.size(); i++) {
+        total_steps = std::lcm(total_steps, each_steps[i]);
+    }
+
     input.close();
-    return 1;
+    return total_steps;
 }

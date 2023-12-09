@@ -28,7 +28,7 @@ uint32_t solve4a();             uint32_t solve4b();
 uint32_t solve5a();             uint32_t solve5b();
 uint32_t solve6a();             uint32_t solve6b();
 uint32_t solve7a();             uint32_t solve7b();
-uint32_t solve8a();             uint32_t solve8b();
+uint32_t solve8a();             uint64_t solve8b();
 
 #ifdef IMPL_DAYS
 
