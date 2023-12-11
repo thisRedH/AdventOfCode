@@ -18,7 +18,7 @@ int32_t calc_prediction(const std::vector<int32_t>& line) {
         steps.push_back(step);
     }
 
-    for (const auto& step : steps | std::views::reverse)
+    for (const auto& step : steps)
         prediction += step.back();
 
     return prediction;
@@ -47,14 +47,27 @@ uint32_t solve9a() {
     return total;
 }
 
-
 uint32_t solve9b() {
     std::ifstream input("./input/day9.txt");
 
-    for (std::string line; getline(input, line);) {
+    std::vector<std::vector<int32_t>> lines_num;
+    int32_t total = 0;
 
+    for (std::string line; getline(input, line);) {
+        std::istringstream ss(std::move(line));
+        std::vector<int32_t> line_num;
+
+        for (int32_t n; ss >> n;)
+            line_num.push_back(n);
+
+        lines_num.push_back(line_num);
+    }
+
+    for (auto& line : lines_num) {
+        std::reverse(line.begin(), line.end());
+        total += calc_prediction(line);
     }
 
     input.close();
-    return 12;
+    return total;
 }
