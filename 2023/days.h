@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <numeric>
 #include <array>
+#include <ranges>
 #include <set>
 #include <map>
 #include <unordered_map>
