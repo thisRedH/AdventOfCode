@@ -2,23 +2,29 @@
 #include "days.h"
 
 struct vec2 {
-    int32_t y : 16,
-            x : 16;
+    int16_t y;
+    int16_t x;
 
     auto operator+(const vec2& other) const {
-        return vec2{y + other.y, x + other.x};
+        return vec2{
+            static_cast<int16_t>(y + other.y),
+            static_cast<int16_t>(x + other.x)
+        };
     }
     auto operator-(const vec2& other) const {
-        return vec2{y - other.y, x - other.x};
+        return vec2{
+            static_cast<int16_t>(y - other.y),
+            static_cast<int16_t>(x - other.x)
+        };
     }
-    auto operator+=(const vec2& other) -> vec2& {
-        y += other.y;
-        x += other.x;
+    auto operator+=(const vec2& other) {
+        y += static_cast<int16_t>(other.y);
+        x += static_cast<int16_t>(other.x);
         return *this;
     }
-    auto operator-=(const vec2& other) -> vec2& {
-        y -= other.y;
-        x -= other.x;
+    auto operator-=(const vec2& other) {
+        y -= static_cast<int16_t>(other.y);
+        x -= static_cast<int16_t>(other.x);
         return *this;
     }
     auto operator==(const vec2& other) const {
@@ -54,7 +60,7 @@ inline bool in_map(const vec2& pos, const std::vector<std::string>& map) {
         pos.y < map.size() && pos.x < map[0].size();
 }
 
-void _walk(vec2 current, vec2 old,
+void _walk(vec2& current, vec2& old,
     const std::vector<std::string>& map, uint32_t& steps_r
 ) {
     if (!in_map(current, map)) return;
@@ -101,7 +107,9 @@ void _walk(vec2 current, vec2 old,
 
 inline uint32_t walk(const vec2& start, const std::vector<std::string>& map) {
     uint32_t steps = 0;
-    _walk(start, start, map, steps);
+    vec2 current = start;
+    vec2 old = start;
+    _walk(current, old, map, steps);
     return steps;
 }
 
