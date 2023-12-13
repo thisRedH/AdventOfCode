@@ -264,14 +264,12 @@ uint32_t solve10b() {
                 continue;
             if (point_inside_polygon({i, j}, path)) {
                 total++;
-#ifndef DEBUG_GRAPH
-            }
-#else
+#ifdef DEBUG_GRAPH
                 graph[i][j] = 'I';
             } else {
                 graph[i][j] = 'O';
-            }
 #endif
+            }
         }
     }
 
