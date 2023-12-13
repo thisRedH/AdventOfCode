@@ -1,21 +1,23 @@
 
-#include <stdint.h>
-#include <vector>
+#include <cstdint>
+#include <cstring>
+
 #include <string>
 #include <sstream>
-#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <iterator>
 #include <algorithm>
 #include <numeric>
-#include <array>
 #include <ranges>
+
+#include <vector>
+#include <array>
 #include <set>
 #include <map>
 #include <unordered_map>
 
-const uint16_t kCURRENT_DAY = 10;
+const uint16_t kCURRENT_DAY = 11;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -32,6 +34,7 @@ uint32_t solve7a();             uint32_t solve7b();
 uint32_t solve8a();             uint64_t solve8b();
 uint32_t solve9a();             uint32_t solve9b();
 uint32_t solve10a();            uint32_t solve10b();
+uint32_t solve11a();            uint32_t solve11b();
 
 #ifdef IMPL_DAYS
 
@@ -66,6 +69,9 @@ void solve(uint16_t day) {
         break;
     case 10:
         SHOW_AB(day, solve10a(), solve10b());
+        break;
+    case 11:
+        SHOW_AB(day, solve11a(), solve11b());
         break;
     default:
         break;
