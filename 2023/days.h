@@ -14,10 +14,11 @@
 #include <vector>
 #include <array>
 #include <set>
+#include <tuple>
 #include <map>
 #include <unordered_map>
 
-const uint16_t kCURRENT_DAY = 11;
+const uint16_t kCURRENT_DAY = 12;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -35,6 +36,7 @@ uint32_t solve8a();             uint64_t solve8b();
 uint32_t solve9a();             uint32_t solve9b();
 uint32_t solve10a();            uint32_t solve10b();
 uint32_t solve11a();            uint64_t solve11b();
+uint32_t solve12a();            uint32_t solve12b();
 
 #ifdef IMPL_DAYS
 
@@ -72,6 +74,10 @@ void solve(uint16_t day) {
         break;
     case 11:
         SHOW_AB(day, solve11a(), solve11b());
+        break;
+    case 12:
+        //SHOW_AB(day, solve12a(), solve12b());
+        solve12a();
         break;
     default:
         break;
