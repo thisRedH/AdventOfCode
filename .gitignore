@@ -1,4 +1,7 @@
+.vscode
 
 build
 bin
-.vscode
+
+/*.sh
+/*.bat
