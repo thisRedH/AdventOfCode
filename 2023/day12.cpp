@@ -26,12 +26,12 @@ struct VCKeyHash {
 };
 
 //#define NO_MEMO 1
-using MemoTable = std::unordered_map<VCKey, uint32_t, VCKeyHash>;
+using MemoTable = std::unordered_map<VCKey, uint64_t, VCKeyHash>;
 
 //#define DEBUG_GRAPH_STEPPING 1
 //#define DEBUG_GRAPH 1
 #ifdef DEBUG_GRAPH
-uint32_t valid_comb(
+uint64_t valid_comb(
     const std::string& springs, const std::vector<uint16_t>& groups, MemoTable& memo,
     uint16_t si = 0, uint16_t gi = 0, uint16_t count = 0,
     char last_c = '.', std::string deug_str = ""
@@ -45,7 +45,7 @@ uint32_t valid_comb(
     }
 #endif
 
-    uint32_t r = 0;
+    uint64_t r = 0;
     
     deug_str += last_c;
     
@@ -88,7 +88,7 @@ uint32_t valid_comb(
 }
 #else
 
-uint32_t valid_comb(
+uint64_t valid_comb(
     const std::string& springs, const std::vector<uint16_t>& groups, MemoTable& memo,
     uint16_t si = 0, uint16_t gi = 0, uint16_t count = 0
 ) {
@@ -100,7 +100,7 @@ uint32_t valid_comb(
     }
 #endif
 
-    uint32_t r = 0;
+    uint64_t r = 0;
 
     if (si < springs.size()) {
         const char& c = springs[si++];
@@ -133,14 +133,6 @@ uint32_t valid_comb(
 
 uint32_t solve12a() {
     std::ifstream input("./input/day12.txt");
-    /*std::stringstream input(
-        "???.### 1,1,3\n"
-        ".??..??...?##. 1,1,3\n"
-        "?#?#?#?#?#?#?#? 1,3,1,6\n"
-        "????.#...#... 4,1,1\n"
-        "????.######..#####. 1,6,5\n"
-        "?###???????? 3,2,1\n"
-    );*/
 
     std::vector<std::string> springs_rows;
     std::vector<std::vector<uint16_t>> groups_rows;
@@ -169,17 +161,49 @@ uint32_t solve12a() {
         memo.clear();
     }
 
-    std::cout << arrangements << std::endl;
     input.close();
     return arrangements;
 }
 
-uint32_t solve12b() {
+uint64_t solve12b() {
     std::ifstream input("./input/day12.txt");
 
+    std::vector<std::string> springs_rows;
+    std::vector<std::vector<uint16_t>> groups_rows;
+
     for (std::string line; getline(input, line);) {
+        std::istringstream ss(std::move(line));
+
+        std::string springs;
+        std::string springs_in;
+        std::vector<uint16_t> groups;
+        std::vector<uint16_t> groups_in;
+        
+        ss >> springs_in;
+        for (uint16_t n = 0; ss >> n;) {
+            groups_in.push_back(n);
+            ss.ignore();
+        }
+
+        springs = springs_in;
+        groups = groups_in;
+
+        for (size_t i = 0; i < 4; i++) {
+            springs += '?' + springs_in;
+            groups.insert(groups.end(), groups_in.begin(), groups_in.end());
+        }
+
+        springs_rows.push_back(std::move(springs));
+        groups_rows.push_back(std::move(groups));
+    }
+
+    uint64_t arrangements = 0;
+
+    for (auto [springs, group] : std::views::zip(springs_rows, groups_rows)) {
+        MemoTable memo;
+        arrangements += valid_comb(springs, group, memo);
     }
 
     input.close();
-    return 23;
+    return arrangements;
 }

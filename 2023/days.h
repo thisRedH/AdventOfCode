@@ -37,7 +37,7 @@ uint32_t solve8a();             uint64_t solve8b();
 uint32_t solve9a();             uint32_t solve9b();
 uint32_t solve10a();            uint32_t solve10b();
 uint32_t solve11a();            uint64_t solve11b();
-uint32_t solve12a();            uint32_t solve12b();
+uint32_t solve12a();            uint64_t solve12b();
 
 #ifdef IMPL_DAYS
 
@@ -77,8 +77,7 @@ void solve(uint16_t day) {
         SHOW_AB(day, solve11a(), solve11b());
         break;
     case 12:
-        //SHOW_AB(day, solve12a(), solve12b());
-        solve12a();
+        SHOW_AB(day, solve12a(), solve12b());
         break;
     default:
         break;
