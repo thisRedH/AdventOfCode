@@ -16,12 +16,11 @@ uint64_t solve14a() {
             if (map[row][col] == 'O') {
                 map[row][col] = '.';
 
-                for (int32_t rowb = row -1; rowb >= -1; rowb--) {
-                    if (rowb < 0 || map[rowb][col] == 'O' || map[rowb][col] == '#') {
-                        map[rowb +1][col] = 'O';
-                        break;
-                    }
-                }
+                int32_t rowb = row - 1;
+                while (rowb >= 0 && map[rowb][col] == '.')
+                    rowb--;
+
+                map[rowb +1][col] = 'O';
             }
         }
     }
