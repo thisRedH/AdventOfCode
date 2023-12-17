@@ -1,6 +1,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <cctype>
 
 #include <string>
 #include <sstream>
