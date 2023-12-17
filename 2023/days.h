@@ -15,6 +15,7 @@
 #include <vector>
 #include <array>
 #include <set>
+#include <unordered_set>
 #include <tuple>
 #include <map>
 #include <unordered_map>
@@ -39,7 +40,7 @@ uint32_t solve10a();            uint32_t solve10b();
 uint32_t solve11a();            uint64_t solve11b();
 uint32_t solve12a();            uint64_t solve12b();
 uint32_t solve13a();            uint32_t solve13b();
-uint64_t solve14a();            uint64_t solve14b();
+uint32_t solve14a();            uint64_t solve14b();
 
 #ifdef IMPL_DAYS
 
