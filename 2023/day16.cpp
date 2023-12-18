@@ -67,8 +67,6 @@ enum Directions : int8_t {
     EAST  =  1,
 };
 
-std::vector<std::string> debugmap;
-
 uint32_t walk(
     const std::vector<std::string>& map,
     std::unordered_set<vec2>& wlkd,
@@ -135,14 +133,73 @@ uint32_t solve16a() {
 
     std::unordered_set<vec2> wlkd;
     std::unordered_set<std::pair<vec2, vec2>> wlkdd;
-    debugmap = map;
     energized = walk(map, wlkd, wlkdd);
 
     input.close();
     return energized;
 }
 
-
 uint32_t solve16b() {
-    return 1;
+    std::ifstream input("./input/day16.txt");
+
+    std::vector<std::string> map;
+    uint32_t energized = 0;
+
+    for (std::string line; getline(input, line);)
+        if (!line.empty())
+            map.push_back(line);
+
+    std::unordered_set<vec2> wlkd;
+    std::unordered_set<std::pair<vec2, vec2>> wlkdd;
+
+    for (int16_t row = 0; row < map.size(); row++) {
+        energized = std::max(
+            walk(
+                map, wlkd, wlkdd,
+                {row, 0},
+                {0, EAST}
+            ),
+            energized
+        );
+        wlkd.clear();
+        wlkdd.clear();
+
+        energized = std::max(
+            walk(
+                map, wlkd, wlkdd,
+                {row, static_cast<int16_t>(map[0].size() -1)},
+                {0, WEST}
+            ),
+            energized
+        );
+        wlkd.clear();
+        wlkdd.clear();
+    }
+
+    for (int16_t col = 0; col < map[0].size(); col++) {
+        energized = std::max(
+            walk(
+                map, wlkd, wlkdd,
+                {0, col},
+                {SOUTH, 0}
+            ),
+            energized
+        );
+        wlkd.clear();
+        wlkdd.clear();
+
+        energized = std::max(
+            walk(
+                map, wlkd, wlkdd,
+                {static_cast<int16_t>(map.size() -1), col},
+                {NORTH, 0}
+            ),
+            energized
+        );
+        wlkd.clear();
+        wlkdd.clear();
+    }
+
+    input.close();
+    return energized;
 }
