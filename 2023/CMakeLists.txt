@@ -28,6 +28,12 @@ MATH(EXPR stack_size "8 * 1024 * 1024") # 8 Mb
 set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS -Wl,--stack,${stack_size})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
+# Libs
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
+endif()
+
 # Export input files
 file(GLOB_RECURSE INPUT_FILE "${CMAKE_CURRENT_LIST_DIR}/input/*")
 foreach(FILE ${INPUT_FILE})

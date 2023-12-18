@@ -7,10 +7,11 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
-#include <iterator>
-#include <algorithm>
 #include <numeric>
+#include <iterator>
 #include <ranges>
+#include <algorithm>
+#include <exception>
 #include <chrono>
 
 #include <vector>

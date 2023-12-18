@@ -152,7 +152,11 @@ uint32_t solve16b() {
     std::unordered_set<vec2> wlkd;
     std::unordered_set<std::pair<vec2, vec2>> wlkdd;
 
-    for (int16_t row = 0; row < map.size(); row++) {
+    const int16_t map_width = map.size();
+    const int16_t map_height = map[0].size();
+
+    #pragma omp parallel for shared(energized) private(wlkd, wlkdd) schedule(dynamic)
+    for (int16_t row = 0; row < map_width; row++) {
         energized = std::max(
             walk(
                 map, wlkd, wlkdd,
@@ -163,11 +167,14 @@ uint32_t solve16b() {
         );
         wlkd.clear();
         wlkdd.clear();
+    }
 
+    #pragma omp parallel for shared(energized) private(wlkd, wlkdd) schedule(dynamic)
+    for (int16_t row = 0; row < map_width; row++) {
         energized = std::max(
             walk(
                 map, wlkd, wlkdd,
-                {row, static_cast<int16_t>(map[0].size() -1)},
+                {row, static_cast<int16_t>(map_width -1)},
                 {0, WEST}
             ),
             energized
@@ -176,7 +183,8 @@ uint32_t solve16b() {
         wlkdd.clear();
     }
 
-    for (int16_t col = 0; col < map[0].size(); col++) {
+    #pragma omp parallel for shared(energized) private(wlkd, wlkdd) schedule(dynamic)
+    for (int16_t col = 0; col < map_height; col++) {
         energized = std::max(
             walk(
                 map, wlkd, wlkdd,
@@ -187,11 +195,14 @@ uint32_t solve16b() {
         );
         wlkd.clear();
         wlkdd.clear();
+    }
 
+    #pragma omp parallel for shared(energized) private(wlkd, wlkdd) schedule(dynamic)
+    for (int16_t col = 0; col < map_height; col++) {
         energized = std::max(
             walk(
                 map, wlkd, wlkdd,
-                {static_cast<int16_t>(map.size() -1), col},
+                {static_cast<int16_t>(map_width -1), col},
                 {NORTH, 0}
             ),
             energized
