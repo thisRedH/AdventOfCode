@@ -21,8 +21,10 @@
 #include <tuple>
 #include <map>
 #include <unordered_map>
+#include <deque>
+#include <queue>
 
-const uint16_t kCURRENT_DAY = 16;
+const uint16_t kCURRENT_DAY = 17;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -45,8 +47,10 @@ uint32_t solve13a();            uint32_t solve13b();
 uint32_t solve14a();            uint64_t solve14b();
 uint32_t solve15a();            uint32_t solve15b();
 uint32_t solve16a();            uint32_t solve16b();
+uint32_t solve17a();            uint32_t solve17b();
 
-#ifdef IMPL_DAYS
+#if defined(IMPL_DAYS) && !defined(_IMPL_DAYS_GUARD)
+#define _IMPL_DAYS_GUARD
 
 void solve(uint16_t day) {
     switch (day) {
@@ -97,6 +101,9 @@ void solve(uint16_t day) {
         break;
     case 16:
         SHOW_AB(day, solve16a(), solve16b());
+        break;
+    case 17:
+        SHOW_AB(day, solve17a(), solve17b());
         break;
     default:
         break;
