@@ -4,20 +4,9 @@ project(AoC23)
 
 # Compiler Options Global
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-add_compile_options(
-#TODO:    -Wall -Werror -Wno-error=maybe-uninitialized
-    $<$<CONFIG:RELEASE>:-Ofast>
-    $<$<CONFIG:DEBUG>:-O0>
-    $<$<CONFIG:DEBUG>:-ggdb3>
-)
-add_compile_definitions($<$<CONFIG:RELEASE>:NDEBUG>)
 
 # Add executable
-file(GLOB_RECURSE SRC_FILES
-    "${CMAKE_CURRENT_LIST_DIR}/*.cc"
-    "${CMAKE_CURRENT_LIST_DIR}/*.cpp"
-    "${CMAKE_CURRENT_LIST_DIR}/*.cxx"
-)
+file(GLOB_RECURSE SRC_FILES "${CMAKE_CURRENT_LIST_DIR}/day*.cpp" "${CMAKE_CURRENT_LIST_DIR}/main.cpp")
 set_source_files_properties(${SRC_FILES} PROPERTIES LANGUAGE CXX)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
@@ -25,7 +14,16 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Compiler Options for ${PROJECT_NAME}
 MATH(EXPR stack_size "8 * 1024 * 1024") # 8 Mb
-set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS -Wl,--stack,${stack_size})
+if(NOT MSVC)
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS -Wl,--stack,${stack_size})
+    add_compile_options(
+        #TODO:    -Wall -Werror -Wno-error=maybe-uninitialized
+        $<$<CONFIG:RELEASE>:-Ofast>
+        $<$<CONFIG:DEBUG>:-O0>
+        $<$<CONFIG:DEBUG>:-ggdb3>
+    )
+endif()
+add_compile_definitions($<$<CONFIG:RELEASE>:NDEBUG>)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
 # Libs

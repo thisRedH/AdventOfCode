@@ -9,7 +9,7 @@ struct vec2_u64 {
 // Uses Manhattan distance formula
 uint32_t get_distance(const vec2_u64& start, const vec2_u64& end) {
     return static_cast<uint32_t>(
-        (uint32_t)abs((uint32_t)(start.x - end.x)) + (uint32_t)abs((uint32_t)(start.y - end.y))
+        (uint32_t)abs(int(start.x - end.x)) + (uint32_t)abs(int(start.y - end.y))
     );
 }
 

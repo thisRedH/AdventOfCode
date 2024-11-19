@@ -1,7 +1,11 @@
 .vscode
+.vs
 
 build
 bin
+out
 
 /*.sh
 /*.bat
+
+2023/compile_commands.json
