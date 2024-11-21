@@ -25,7 +25,7 @@
 #include <deque>
 #include <queue>
 
-const uint16_t kCURRENT_DAY = 18;
+const uint16_t kCURRENT_DAY = 19;
 
 #define SHOW_AB(day,a,b)        (std::cout << "Day " << (day) <<\
                                  "\ta: " << (a) << '\n' <<\
@@ -50,6 +50,7 @@ uint32_t solve15a();            uint32_t solve15b();
 uint32_t solve16a();            uint32_t solve16b();
 uint32_t solve17a();            uint32_t solve17b();
 uint32_t solve18a();            uint64_t solve18b();
+uint32_t solve19a();            uint64_t solve19b();
 
 #if defined(IMPL_DAYS) && !defined(_IMPL_DAYS_GUARD)
 #define _IMPL_DAYS_GUARD
@@ -109,6 +110,9 @@ void solve(uint16_t day) {
         break;
     case 18:
         SHOW_AB(day, solve18a(), solve18b());
+        break;
+    case 19:
+        SHOW_AB(day, solve19a(), solve19b());
         break;
     default:
         break;
