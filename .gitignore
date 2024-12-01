@@ -10,3 +10,5 @@ out
 /*.bat
 
 2023/compile_commands.json
+
+**/input/
