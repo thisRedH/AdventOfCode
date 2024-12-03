@@ -18,8 +18,7 @@ func Day03() (int64, int64) {
     mulMatches := mulRe.FindAllStringSubmatch(string(in), -1)
 
     do := true
-    var mulTotal int64 = 0
-    var mulTotalState int64 = 0
+    var mulTotal, mulTotalState int64
 
     for _, match := range mulMatches {
         if match[3] == "do" {
