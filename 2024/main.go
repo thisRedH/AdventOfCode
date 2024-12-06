@@ -9,12 +9,13 @@ import (
 )
 
 func main() {
-    daysMap := map[int] func() (int64, int64) {
+    daysMap := map[int]func() (int64, int64) {
         1: days.Day01,
         2: days.Day02,
         3: days.Day03,
         4: days.Day04,
         5: days.Day05,
+        6: days.Day06,
     }
 
     latestDay := len(daysMap)
