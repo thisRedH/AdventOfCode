@@ -18,6 +18,7 @@ func main() {
         6: days.Day06,
         7: days.Day07,
         8: days.Day08,
+        9: days.Day09,
     }
 
     latestDay := len(daysMap)
