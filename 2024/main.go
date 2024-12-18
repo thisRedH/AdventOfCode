@@ -26,6 +26,7 @@ func main() {
         14: days.Day14,
         15: days.Day15,
         16: days.Day16,
+        17: days.Day17,
     }
 
     latestDay := len(daysMap)
@@ -35,13 +36,19 @@ func main() {
         arg = os.Args[1]
     }
 
+    printDay := func(day int) {
+        fmt.Printf("Day %d:\n", day)
+        p1, p2 := daysMap[day]()
+        if p1 != -1 && p2 != -1 {
+            fmt.Printf(" - %d\n - %d\n", p1, p2)
+        }
+    }
+
     switch arg {
     case "all":
         fmt.Println("Running all days...")
         for i := 1; i <= latestDay; i++ {
-            fmt.Printf("Day %d:\n", i)
-            p1, p2 := daysMap[i]()
-            fmt.Printf(" - %d\n - %d\n", p1, p2)
+            printDay(i)
         }
     default:
         dayNum, err := strconv.Atoi(arg)
@@ -50,8 +57,6 @@ func main() {
             return
         }
 
-        fmt.Printf("Day %d:\n", dayNum)
-        p1, p2 := daysMap[dayNum]()
-        fmt.Printf(" - %d\n - %d\n", p1, p2)
+        printDay(dayNum)
     }
 }
